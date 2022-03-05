@@ -23,7 +23,7 @@ $ git clone 'repo-link'
 
 Rename **.env.example** to **.env** and change database credentials;
 
-In the file ormconfig.json change database crendetials. This file is important for migrations.
+Rename **ormconfig.json.example** to **ormconfig.json** and change or add you database credentials.
 
 ## Installation
 
