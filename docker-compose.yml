@@ -1,0 +1,28 @@
+# Nota importante: el pgadmin need permissions, run: "sudo chown -R 5050:5050 pgadmin" and then restart container.
+version: '3.5'
+
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres:14-alpine3.15
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-username}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      POSTGRES_DB: ${POSTGRES_DB:-postgres}
+      PGDATA: /data/postgres
+    volumes:
+       - ./data/postgres:/data/postgres
+    ports:
+      - 5432:5432
+  
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-email@default.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-password}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+       - ./data/pgadmin:/var/lib/pgadmin
+    ports:
+      - 8080:80
